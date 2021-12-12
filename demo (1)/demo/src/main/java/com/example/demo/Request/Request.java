@@ -19,26 +19,8 @@ public class Request {
     private Long idRequest ;
     private String  state ;
     private Date date;
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
     private String time;
     private String comment;
-
 
 
     @ManyToMany
@@ -56,8 +38,31 @@ public class Request {
     private Customer customer;
 
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
 public Request(){}
 
+
+    public Request(Long idRequest, String state, String comment) {
+        this.idRequest = idRequest;
+        this.state = state;
+        this.comment = comment;
+
+    }
     public Long getIdRequest() {
         return idRequest;
     }
@@ -80,13 +85,6 @@ public Request(){}
 
     public void setService_enrolled(List<ServiceType> service_enrolled) {
         this.service_enrolled = service_enrolled;
-    }
-
-    public Request(Long idRequest, String state, String comment) {
-        this.idRequest = idRequest;
-        this.state = state;
-        this.comment = comment;
-
     }
 
     public String getComment() {

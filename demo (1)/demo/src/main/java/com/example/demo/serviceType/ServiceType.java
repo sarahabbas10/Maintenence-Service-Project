@@ -14,6 +14,7 @@ public class ServiceType {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idServiceType;
+    @Column(unique = true)
     private String name;
 
 
@@ -21,13 +22,8 @@ public class ServiceType {
     @ManyToOne(fetch=FetchType.EAGER,optional = true)
     private MaintenanceService maintenanceService;
 
-    public List<Request> getRequest() {
-        return request;
-    }
 
-    public void setRequest(List<Request> request) {
-        this.request = request;
-    }
+    private String imgUrl;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "service_enrolled")
@@ -42,6 +38,21 @@ public class ServiceType {
     }
 
 
+    public List<Request> getRequest() {
+        return request;
+    }
+
+    public void setRequest(List<Request> request) {
+        this.request = request;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
 
     public String getName() {
         return name;
@@ -59,14 +70,6 @@ public class ServiceType {
     public void setIdServiceType(long idServiceType) {
         this.idServiceType = idServiceType;
     }
-
-    @Override
-    public String toString() {
-        return "ServiceType{" +
-                "idServiceType=" + idServiceType +
-                ", name='" + name + '\'' +
-                '}';
-    }
     public MaintenanceService getMaintenanceService() {
         return maintenanceService;
     }
@@ -74,6 +77,19 @@ public class ServiceType {
     public void setMaintenanceService(MaintenanceService maintenanceService) {
         this.maintenanceService = maintenanceService;
     }
+
+    @Override
+    public String toString() {
+        return "ServiceType{" +
+                "idServiceType=" + idServiceType +
+                ", name='" + name + '\'' +
+                ", maintenanceService=" + maintenanceService +
+                ", imgUrl='" + imgUrl + '\'' +
+                ", request=" + request +
+                '}';
+    }
+
+
 }
 
 

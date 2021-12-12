@@ -1,6 +1,8 @@
 package com.example.demo.Request;
 
+import com.example.demo.customer.Customer;
 import com.example.demo.serviceType.ServiceType;
+import com.example.demo.customer.CustomerRepository;
 import com.example.demo.serviceType.ServiceTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,11 +18,15 @@ public class RequestController {
 private final RequestRepository requestRepository;
 
 private final ServiceTypeRepository serviceTypeRepository;
+
+
+private final CustomerRepository customerRepository;
     @Autowired
-    public RequestController(RequestService requestService, RequestRepository requestRepository, ServiceTypeRepository serviceTypeRepository) {
+    public RequestController(RequestService requestService, RequestRepository requestRepository, ServiceTypeRepository serviceTypeRepository, CustomerRepository customerRepository) {
         this.requestService = requestService;
         this.requestRepository = requestRepository;
         this.serviceTypeRepository = serviceTypeRepository;
+        this.customerRepository = customerRepository;
     }
 
     @GetMapping
@@ -34,20 +40,24 @@ private final ServiceTypeRepository serviceTypeRepository;
         return requestService.getRequest(idRequest);
     }
 
-    @PostMapping
-    public Request addRequest(@RequestBody Form form){
-        return requestService.addRequest(form.getRequest(),form.getIdCustomer());
-    }
+//
+//    @PostMapping
+//    public Request addRequest(@RequestBody Form form){
+//        return requestService.addRequest(form.getRequest(),form.getIdCustomer());
+//    }
 
-    @PostMapping("/re/{idRequest}/service/{idServiceType}")
+    @PostMapping("/newRequest")
     Request enrollServiceToRequest(
-            @PathVariable Long idRequest,
-           @PathVariable Long idServiceType
+            @RequestBody Form form
+
     ){
-        Request request=requestRepository.findById(idRequest).get();
-        ServiceType serviceType=serviceTypeRepository.findById(idServiceType).get();
-        request.enrollService(serviceType);
-        return requestRepository.save(request);
+        Customer customer = customerRepository.findById(form.getIdCustomer()).get();
+        form.getRequest().setCustomer(customer);
+
+        ServiceType serviceType=serviceTypeRepository.findById(form.getIdServiceType()).get();
+        form.getRequest().enrollService(serviceType);
+
+        return requestRepository.save(form.getRequest());
 
     }
 
@@ -56,10 +66,23 @@ private final ServiceTypeRepository serviceTypeRepository;
 
 }
 
+//class Form{
+//    private Request request;
+//    private Long idCustomer;
+//      public Request getRequest(){return request;}
+//    public Long getIdCustomer(){return idCustomer;}
+//
+//}
+
+
 class Form{
     private Request request;
     private Long idCustomer;
       public Request getRequest(){return request;}
     public Long getIdCustomer(){return idCustomer;}
+    private Long idServiceType;
 
+    public Long getIdServiceType() {
+        return idServiceType;
+    }
 }

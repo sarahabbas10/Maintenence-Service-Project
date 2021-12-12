@@ -1,5 +1,6 @@
 package com.example.demo.serviceType;
 
+import com.example.demo.maintenance_service.MaintenanceService;
 import com.example.demo.review.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,9 +25,22 @@ public class ServiceTypeController {
         return serviceTypeService.getAllServiceType();
     }
 
+    @GetMapping("/{name}")
+    public ServiceType getServiceType(@PathVariable String name) {
+        return serviceTypeService.getServiceType(name);
+    }
+
+    @PutMapping("/{id}")
+    public void updateServiceType(@PathVariable String id, @RequestBody ServiceType serviceType) {
+        serviceTypeService.updateServiceType(id, serviceType);
+    }
+    @DeleteMapping("/{id}")
+    public void deleteServiceType(@PathVariable String id) {
+        serviceTypeService.deleteServiceType(id);
+    }
     @PostMapping
     public ServiceType addServiceType(@RequestBody Form form){
-        return serviceTypeService.addServiceType(form.getServiceType());
+        return serviceTypeService.addServiceType(form.getServiceType(),form.getIdMaintenanceService());
     }
 
 }

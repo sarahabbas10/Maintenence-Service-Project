@@ -35,14 +35,15 @@ public class RequestService {
         }
 
 
-    public Request addRequest(Request request,Long idCustomer){
-
-        Customer customer=customerRepository.findById(idCustomer).orElse(null);
-        request.setCustomer(customer);
-
-        return requestRepository.save(request);
-
-    }
+//    public Request addRequest(Request request,Long idCustomer,Long idServiceType){
+//
+//        Customer customer=customerRepository.findById(idCustomer).orElse(null);
+//        request.setCustomer(customer);
+//        ServiceType serviceType=serviceTypeRepository.findById(idServiceType).orElse(null);
+//        request.setService_enrolled(serviceType);
+//        return requestRepository.save(request);
+//
+//    }
 
 
 

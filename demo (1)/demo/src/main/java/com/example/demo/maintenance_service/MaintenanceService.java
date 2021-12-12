@@ -24,6 +24,16 @@ public class MaintenanceService {
 
     private String name;
 
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+    private String imgUrl;
+
     public List<ServiceType> getServiceTypes() {
         return serviceTypes;
     }
@@ -67,8 +77,10 @@ public class MaintenanceService {
         return "MaintenanceService{" +
                 "idMaintenanceService=" + idMaintenanceService +
                 ", name='" + name + '\'' +
+                ", imgUrl='" + imgUrl + '\'' +
                 ", serviceTypes=" + serviceTypes +
                 ", reviews=" + reviews +
                 '}';
     }
 }
+

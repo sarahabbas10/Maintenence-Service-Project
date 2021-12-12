@@ -1,6 +1,7 @@
 package com.example.demo.customer;
 
 
+import com.example.demo.Request.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,10 +24,10 @@ public class CustomerController {
         return customerService.getCustomer(phoneNo);
     }
 
-//    @GetMapping("/{requestNo}")
-//    public Customer getCustomer(@PathVariable String phoneNo){
-//        return customerService.getCustomer(phoneNo);
-//    }
+    @GetMapping("/request/{phoneNo}")
+    public List<Request> getAllRequest(@PathVariable String phoneNo){
+        return customerService.getAllRequest(phoneNo);
+    }
 
 
     @GetMapping

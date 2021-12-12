@@ -1,6 +1,6 @@
 package com.example.demo.customer;
 
-import org.apache.catalina.connector.Request;
+import com.example.demo.Request.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,10 +43,10 @@ public class CustomerService {
             return customerRepository.save(customer);
         }
 
-//        public List<Request> getAllRequest(String  phoneNo){
-//            Customer customer=customerRepository.findByPhoneNo(phoneNo);
-//            return customer.getRequests();
-//        }
+        public List<Request> getAllRequest(String  phoneNo){
+            Customer customer=customerRepository.findByPhoneNo(phoneNo);
+            return customer.getRequests();
+        }
 
         public Customer login(Customer data){
             Customer customer=   customerRepository.findByPhoneNo(data.getPhoneNo());

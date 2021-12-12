@@ -57,7 +57,7 @@ public Customer(){}
     }
 
 
-    public long getIdCustomer() {
+    public Long getIdCustomer() {
         return idCustomer;
     }
 
